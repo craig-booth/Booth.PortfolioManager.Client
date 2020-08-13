@@ -1,0 +1,29 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:views="clr-namespace:Booth.PortfolioManager.Client.Views"
+                    xmlns:viewmodels="clr-namespace:Booth.PortfolioManager.Client.ViewModels"
+                    xmlns:controls="clr-namespace:Booth.PortfolioManager.Client.Controls">
+
+
+    <DataTemplate DataType="{x:Type viewmodels:UnrealisedGainsViewModel}">
+
+        <ScrollViewer>
+
+            <controls:DataTable Data="{Binding UnrealisedGains}" DataType="{x:Type viewmodels:UnrealisedGainViewItem}" Margin="0,10,0,0">
+                <controls:DataTable.Columns>
+                    <controls:DataTableColumn Heading="Aquisition" Width="70" MemberBinding="{Binding AquisitionDate, StringFormat={}{0:d}, Mode=OneWay}" SummaryType="Fixed" SummaryValue="Total"/>
+                    <controls:DataTableColumn Heading="Company" Width="*" MemberBinding="{Binding Stock.FormattedCompanyName, Mode=OneWay}" />
+                    <controls:DataTableColumn Heading="Units" Width="80" MemberBinding="{Binding Units, StringFormat={}{0:n0}, Mode=OneWay}" TextAlignment="Right" />
+                    <controls:DataTableColumn Heading="Cost Base" Width="80" MemberBinding="{Binding CostBase, StringFormat={}{0:c2}, Mode=OneWay}" TextAlignment="Right" SummaryType="Sum" />
+                    <controls:DataTableColumn Heading="Market Value" Width="80" MemberBinding="{Binding MarketValue, StringFormat={}{0:c2}, Mode=OneWay}" TextAlignment="Right" SummaryType="Sum" />
+                    <controls:DataTableColumn Heading="Capital Gain" Width="80" MemberBinding="{Binding CapitalGain, StringFormat={}{0:c2}, Mode=OneWay}" TextAlignment="Right" SummaryType="Sum" />
+                    <controls:DataTableColumn Heading="Dicounted Gain" Width="80" MemberBinding="{Binding DiscoutedGain, StringFormat={}{0:c2}, Mode=OneWay}" TextAlignment="Right" SummaryType="Sum" />
+                    <controls:DataTableColumn Heading="Discount Method" Width="80" MemberBinding="{Binding DiscountMethod, Mode=OneWay}" TextAlignment="Right" />
+                </controls:DataTable.Columns>
+            </controls:DataTable>
+
+        </ScrollViewer>
+
+    </DataTemplate>
+
+</ResourceDictionary>

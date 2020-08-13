@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+                    xmlns:views="clr-namespace:Booth.PortfolioManager.Client.Views"
+                    xmlns:viewmodels="clr-namespace:Booth.PortfolioManager.Client.ViewModels"
+                    xmlns:controls="clr-namespace:Booth.PortfolioManager.Client.Controls">
+
+    <DataTemplate DataType="{x:Type viewmodels:TaxableIncomeViewModel}">
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical" Margin="10,30,10,0">
+
+                <TextBlock Text="{Binding Heading}" />
+
+                <controls:DataTable Data="{Binding Income}" DataType="{x:Type viewmodels:IncomeItemViewModel}">
+                    <controls:DataTable.Columns>
+                        <controls:DataTableColumn Heading="Company" Width="*" MemberBinding="{Binding Stock.FormattedCompanyName, Mode=OneWay}" SummaryType="Fixed" SummaryValue="Total"/>
+                        <controls:DataTableColumn Heading="Unfranked" Width="70" MemberBinding="{Binding UnfrankedAmount, StringFormat={}{0:c2}, Mode=OneWay}" TextAlignment="Right" SummaryType="Sum" />
+                        <controls:DataTableColumn Heading="Franked" Width="70" MemberBinding="{Binding FrankedAmount, StringFormat={}{0:c2}, Mode=OneWay}" TextAlignment="Right" SummaryType="Sum" />
+                        <controls:DataTableColumn Heading="Franking Credits" Width="70" MemberBinding="{Binding FrankingCredits, StringFormat={}{0:c2}, Mode=OneWay}" TextAlignment="Right" SummaryType="Sum" />
+                        <controls:DataTableColumn Heading="Net" Width="70" MemberBinding="{Binding NetIncome, StringFormat={}{0:c2}, Mode=OneWay}" TextAlignment="Right" SummaryType="Sum" />
+                        <controls:DataTableColumn Heading="Gross" Width="70" MemberBinding="{Binding GrossIncome, StringFormat={}{0:c2}, Mode=OneWay}" TextAlignment="Right" SummaryType="Sum" />
+                    </controls:DataTable.Columns>
+                </controls:DataTable>
+
+            </StackPanel>
+        </ScrollViewer>
+    </DataTemplate>
+
+
+
+</ResourceDictionary>

@@ -1,0 +1,30 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Booth.WpfControls;assembly=Booth.WpfControls"
+                    xmlns:views="clr-namespace:Booth.PortfolioManager.Client.Views"
+                    xmlns:viewmodels="clr-namespace:Booth.PortfolioManager.Client.ViewModels">
+    
+    <DataTemplate DataType="{x:Type viewmodels:LogonViewModel}">
+
+        <Grid Margin="20,20" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="32"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource FormLabel}" Text="UserName"/>
+            <TextBox Grid.Column="1" Grid.Row="0" Style="{StaticResource FormTextBox}" Text="{Binding UserName, UpdateSourceTrigger=LostFocus,ValidatesOnDataErrors=True, NotifyOnValidationError=true}" />
+
+            <TextBlock Grid.Column="0" Grid.Row="1" Style="{StaticResource FormLabel}" Text="Password"/>
+            <PasswordBox Grid.Column="1" Grid.Row="1" Style="{StaticResource FormPasswordBox}" controls:PasswordBoxBehavior.SelectAllTextOnFocus="True" controls:PasswordBoxBehavior.Password="{Binding Password}" />
+
+        </Grid>
+
+    </DataTemplate>
+</ResourceDictionary>
