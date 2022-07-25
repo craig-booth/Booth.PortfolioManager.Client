@@ -22,7 +22,7 @@
             <TextBox Grid.Column="1" Grid.Row="0" Style="{StaticResource FormTextBox}" Text="{Binding UserName, UpdateSourceTrigger=LostFocus,ValidatesOnDataErrors=True, NotifyOnValidationError=true}" />
 
             <TextBlock Grid.Column="0" Grid.Row="1" Style="{StaticResource FormLabel}" Text="Password"/>
-            <PasswordBox Grid.Column="1" Grid.Row="1" Style="{StaticResource FormPasswordBox}" controls:PasswordBoxBehavior.SelectAllTextOnFocus="True" controls:PasswordBoxBehavior.Password="{Binding Password}" />
+            <PasswordBox Grid.Column="1" Grid.Row="1" Style="{StaticResource FormPasswordBox}" controls:PasswordBoxBehavior.SelectAllTextOnFocus="True" controls:PasswordBoxBehavior.Password="{Binding Password, Mode=TwoWay}" />
 
         </Grid>
 

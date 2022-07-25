@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using Booth.WpfControls;
 using Booth.PortfolioManager.RestApi.Portfolios;
 using Booth.PortfolioManager.Client.Utilities;
+using Booth.Common;
 
 namespace Booth.PortfolioManager.Client.ViewModels
 {
@@ -32,7 +33,7 @@ namespace Booth.PortfolioManager.Client.ViewModels
 
         public async override void RefreshView()
         {
-            var response = await _Parameter.RestClient.Portfolio.GetSummary(_Parameter.Date);
+            var response = await _Parameter.RestClient.Portfolio.GetSummary(new Date(_Parameter.SeletedDate));
             if (response == null)
                 return;
 

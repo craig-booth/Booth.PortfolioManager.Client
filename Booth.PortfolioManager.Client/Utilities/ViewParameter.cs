@@ -29,19 +29,19 @@ namespace Booth.PortfolioManager.Client.Utilities
             }
         }
 
-        private Date _Date;
-        public Date Date
+        private DateTime _SelectedDate;
+        public DateTime SeletedDate
         {
             get
             {
-                return _Date;
+                return _SelectedDate;
             }
 
             set
             {
-                if (_Date != value)
+                if (_SelectedDate != value)
                 {
-                    _Date = value;
+                    _SelectedDate = value;
                     OnPropertyChanged();
                 }
             }
@@ -54,47 +54,38 @@ namespace Booth.PortfolioManager.Client.Utilities
             {
                 return _DateRange;
             }
+        }
+
+        public DateTime FromDate
+        {
+            get
+            {
+                return _DateRange.FromDate.DateTime;
+            }
 
             set
             {
-                if (_DateRange != value)
+                if (_DateRange.FromDate.DateTime != value)
                 {
-                    DateRange = value;
+                    _DateRange = new DateRange(new Date(value), _DateRange.ToDate);
                     OnPropertyChanged();
                 }
             }
         }
 
-        public Date FromDate
+        public DateTime ToDate
         {
             get
             {
-                return _DateRange.FromDate;
+                return _DateRange.ToDate.DateTime;
             }
 
             set
             {
-                if (_DateRange.FromDate != value)
+                if (_DateRange.ToDate.DateTime != value)
                 {
-                    _DateRange = new DateRange(value, _DateRange.ToDate);
-                    OnPropertyChanged("DateRange");
-                }
-            }
-        }
-
-        public Date ToDate
-        {
-            get
-            {
-                return _DateRange.ToDate;
-            }
-
-            set
-            {
-                if (_DateRange.ToDate != value)
-                {
-                    _DateRange = new DateRange(_DateRange.FromDate, value);
-                    OnPropertyChanged("DateRange");
+                    _DateRange = new DateRange(_DateRange.FromDate, new Date(value));
+                    OnPropertyChanged();
                 }
             }
         }
@@ -120,7 +111,7 @@ namespace Booth.PortfolioManager.Client.Utilities
 
         public ViewParameter()
         {
-            _Date = Date.Today;
+            _SelectedDate = DateTime.Today;
             _DateRange = new DateRange(Date.Today.AddYears(-1).AddDays(1), Date.Today);
             _FinancialYear = Date.Today.FinancialYear();
         }

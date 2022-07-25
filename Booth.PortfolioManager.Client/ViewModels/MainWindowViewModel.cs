@@ -89,10 +89,10 @@ namespace Booth.PortfolioManager.Client.ViewModels
 
 #if DEBUG 
            // var url = "https://docker.local:8443";
-            // var url = "http://localhost";
-            var url = "https://portfolio.boothfamily.id.au";
+            var url = "http://localhost:5000/api/";
+           // var url = "https://portfolio.boothfamily.id.au";
 #else
-            var url = "https://portfolio.boothfamily.id.au";
+            var url = "https://portfolio.boothfamily.id.au/api/";
 #endif           
             _RestClient = new RestClient(url);
 

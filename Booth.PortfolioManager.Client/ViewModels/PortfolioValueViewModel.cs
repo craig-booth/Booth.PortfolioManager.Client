@@ -38,12 +38,12 @@ namespace Booth.PortfolioManager.Client.ViewModels
             PortfolioValues.Clear();
 
             // Determine frequency to use
-            var valueFrequency = ValueFrequency.Daily;
+            var valueFrequency = ValueFrequency.Day;
             var timeSpan = _Parameter.DateRange.ToDate - _Parameter.DateRange.FromDate;
             if (timeSpan.Days > 365 * 5)
-                valueFrequency = ValueFrequency.Monthly;
+                valueFrequency = ValueFrequency.Month;
             else if (timeSpan.Days > 365)
-                valueFrequency = ValueFrequency.Weekly;
+                valueFrequency = ValueFrequency.Week;
 
             PortfolioValueResponse response;
             if (_Parameter.Stock.Id == Guid.Empty)
@@ -58,7 +58,7 @@ namespace Booth.PortfolioManager.Client.ViewModels
             foreach (var value in response.Values)
             {
                 DateValues.Add(value.Date.ToShortDateString());
-                values.Add((double)value.Amount);
+                values.Add((double)value.Price);
             }
 
             PortfolioValues.AddRange(values);

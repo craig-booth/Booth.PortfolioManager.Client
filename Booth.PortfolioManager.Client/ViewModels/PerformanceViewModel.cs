@@ -122,9 +122,9 @@ namespace Booth.PortfolioManager.Client.ViewModels
             Dividends = holdingPerformance.Dividends;
             CapitalGain = holdingPerformance.CapitalGain;
             ClosingBalance = holdingPerformance.ClosingBalance;
-            DRPCashBalance = holdingPerformance.DRPCashBalance;
+            DRPCashBalance = holdingPerformance.DrpCashBalance;
             TotalReturn = holdingPerformance.TotalReturn;
-            IRR = holdingPerformance.IRR;
+            IRR = holdingPerformance.Irr;
         }
 
 

@@ -136,7 +136,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="Date" Grid.Column="0" />
-                    <DatePicker SelectedDate="{Binding ViewParameter.Date, Mode=TwoWay}" Grid.Column="1" />
+                    <DatePicker SelectedDate="{Binding ViewParameter.SeletedDate, Mode=TwoWay}" Grid.Column="1" />
                 </Grid>
 
                 <Grid>

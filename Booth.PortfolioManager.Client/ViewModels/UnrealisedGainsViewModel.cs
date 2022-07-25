@@ -43,9 +43,9 @@ namespace Booth.PortfolioManager.Client.ViewModels
         {
             SimpleUnrealisedGainsResponse response;
             if (_Parameter.Stock.Id == Guid.Empty)
-                response = await _Parameter.RestClient.Portfolio.GetCapitalGains(_Parameter.Date);
+                response = await _Parameter.RestClient.Portfolio.GetCapitalGains(new Date(_Parameter.SeletedDate));
             else
-                response = await _Parameter.RestClient.Holdings.GetCapitalGains(_Parameter.Stock.Id, _Parameter.Date);
+                response = await _Parameter.RestClient.Holdings.GetCapitalGains(_Parameter.Stock.Id, new Date(_Parameter.SeletedDate));
             if (response == null)
                 return;
 
@@ -80,12 +80,12 @@ namespace Booth.PortfolioManager.Client.ViewModels
             MarketValue = item.MarketValue;
             CapitalGain = item.CapitalGain;
 
-            if (item.DiscountMethod == CGTMethod.Discount)
+            if (item.DiscountMethod == CgtMethod.Discount)
             {
                 DiscountMethod = "Discount";
                 DiscoutedGain = item.DiscoutedGain;
             }
-            else if (item.DiscountMethod == CGTMethod.Indexation)
+            else if (item.DiscountMethod == CgtMethod.Indexation)
             {
                 DiscountMethod = "Indexation";
                 DiscoutedGain = 0.00m;

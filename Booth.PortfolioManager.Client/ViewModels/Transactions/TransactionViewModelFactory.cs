@@ -27,7 +27,7 @@ namespace Booth.PortfolioManager.Client.ViewModels.Transactions
             TransactionTypes.Add("Cash Transaction", TransactionType.CashTransaction);
             TransactionTypes.Add("Adjust Cost Base", TransactionType.CostBaseAdjustment);
             TransactionTypes.Add("Sell", TransactionType.Disposal);
-            TransactionTypes.Add("Income Received", TransactionType.Income);
+            TransactionTypes.Add("Income Received", TransactionType.IncomeReceived);
             TransactionTypes.Add("Opening Balance", TransactionType.OpeningBalance);
             TransactionTypes.Add("Return Of Capital", TransactionType.ReturnOfCapital);
             TransactionTypes.Add("Adjust Unit Count", TransactionType.UnitCountAdjustment);
@@ -43,7 +43,7 @@ namespace Booth.PortfolioManager.Client.ViewModels.Transactions
                 return new CostBaseAdjustmentViewModel(null, _RestClient);
             else if (type == TransactionType.Disposal)
                 return new DisposalViewModel(null, _RestClient);
-            else if (type == TransactionType.Income)
+            else if (type == TransactionType.IncomeReceived)
                 return new IncomeReceivedViewModel(null, _RestClient);
             else if (type == TransactionType.OpeningBalance)
                 return new OpeningBalanceViewModel(null, _RestClient);
@@ -64,23 +64,21 @@ namespace Booth.PortfolioManager.Client.ViewModels.Transactions
 
         public TransactionViewModel CreateTransactionViewModel(Transaction transaction)
         {
-            var type = RestApiNameMapping.ToTransactionType(transaction.Type);
-
-            if (type == TransactionType.Aquisition)
+            if (transaction.Type == TransactionType.Aquisition)
                 return new AquisitionViewModel(transaction as Aquisition, _RestClient);
-            else if (type == TransactionType.CashTransaction)
+            else if (transaction.Type == TransactionType.CashTransaction)
                 return new CashTransactionViewModel(transaction as CashTransaction, _RestClient);
-            else if (type == TransactionType.CostBaseAdjustment)
+            else if (transaction.Type == TransactionType.CostBaseAdjustment)
                 return new CostBaseAdjustmentViewModel(transaction as CostBaseAdjustment, _RestClient);
-            else if (type == TransactionType.Disposal)
+            else if (transaction.Type == TransactionType.Disposal)
                 return new DisposalViewModel(transaction as Disposal, _RestClient);
-            else if (type == TransactionType.Income)
+            else if (transaction.Type == TransactionType.IncomeReceived)
                 return new IncomeReceivedViewModel(transaction as IncomeReceived, _RestClient);
-            else if (type == TransactionType.OpeningBalance)
+            else if (transaction.Type == TransactionType.OpeningBalance)
                 return new OpeningBalanceViewModel(transaction as OpeningBalance, _RestClient);
-            else if (type == TransactionType.ReturnOfCapital)
+            else if (transaction.Type == TransactionType.ReturnOfCapital)
                 return new ReturnOfCapitalViewModel(transaction as ReturnOfCapital, _RestClient);
-            else if (type == TransactionType.UnitCountAdjustment)
+            else if (transaction.Type == TransactionType.UnitCountAdjustment)
                 return new UnitCountAdjustmentViewModel(transaction as UnitCountAdjustment, _RestClient);
             else
                 throw new NotSupportedException();

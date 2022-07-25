@@ -6,6 +6,7 @@ using Booth.Common;
 using Booth.PortfolioManager.RestApi.Portfolios;
 using Booth.PortfolioManager.Client.Utilities;
 using Booth.PortfolioManager.Client.ViewModels.Transactions;
+using Booth.WpfControls;
 
 namespace Booth.PortfolioManager.Client.ViewModels
 {

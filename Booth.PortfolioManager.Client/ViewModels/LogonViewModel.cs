@@ -15,7 +15,7 @@ namespace Booth.PortfolioManager.Client.ViewModels
     {
         private readonly RestClient _RestClient;
         public string UserName { get; set; }
-        public SecureString Password { get; set; }
+        public string Password { get; set; }
 
         public LogonViewModel(RestClient restClient)
         {
@@ -32,7 +32,7 @@ namespace Booth.PortfolioManager.Client.ViewModels
         {
             await _RestClient.Authenticate(UserName, Password);
 
-            _RestClient.SetPortfolio(new Guid("5D5DE669-726C-4C5D-BB2E-6520C924DB90"));
+            _RestClient.SetPortfolio(new Guid("5d5de669-726c-4c5d-bb2e-6520c924db90"));
 
             Close();
 
