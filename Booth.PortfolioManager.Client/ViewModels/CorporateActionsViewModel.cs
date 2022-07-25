@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 
 using Booth.Common;
+using Booth.WpfControls;
 using Booth.PortfolioManager.RestApi.Portfolios;
 using Booth.PortfolioManager.Client.Utilities;
 using Booth.PortfolioManager.Client.ViewModels.Transactions;
@@ -58,7 +59,17 @@ namespace Booth.PortfolioManager.Client.ViewModels
 
         public async override void RefreshView()
         {
-            var response = await _Parameter.RestClient.Portfolio.GetCorporateActions();
+            CorporateActionsResponse response;
+
+            try
+            {
+                response = await _Parameter.RestClient.Portfolio.GetCorporateActions();
+            }
+            catch (Exception e)
+            {
+                response = null;
+            }
+
             if (response == null)
                 return;
 

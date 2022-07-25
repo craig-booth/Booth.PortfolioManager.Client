@@ -20,7 +20,7 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource FormLabel}" Text="Adjustment Date"/>
-            <DatePicker Grid.Column="1" Grid.Row="0" Style="{StaticResource FormDatePicker}" SelectedDate="{Binding RecordDate}" />
+            <DatePicker Grid.Column="1" Grid.Row="0" Style="{StaticResource FormDatePicker}" SelectedDate="{Binding RecordDate, Converter={StaticResource DateConverter}}" />
 
             <TextBlock Grid.Column="0" Grid.Row="1" Style="{StaticResource FormLabel}" Text="Company"/>
             <ComboBox Grid.Column="1" Grid.Row="1" SelectedItem="{Binding Stock}" ItemsSource="{Binding AvailableStocks}" Style="{StaticResource FormStockList}" IsEnabled="{Binding IsStockEditable}" Visibility="{Binding IsStockEditable,Converter={StaticResource HideIfFalse}}"/>

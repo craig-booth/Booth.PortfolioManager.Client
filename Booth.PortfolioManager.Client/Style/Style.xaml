@@ -7,7 +7,8 @@
     <style:NotTrue x:Key="NotTrue"/>
     <style:VisibilityConverter x:Key="HideIfFalse" TrueValue="Visible" FalseValue="Hidden"/>
     <style:VisibilityConverter x:Key="HideIfTrue" TrueValue="Hidden" FalseValue="Visible"/>
-    
+    <style:DateConverter x:Key="DateConverter"/>
+
     <Color x:Key="PositiveColor" A="255" R="3" G="102" B="2"/>
     <Color x:Key="NegativeColor" A="255" R="143" G="3" B="3"/>
     <Color x:Key="NeutralColor" A="255" R="54" G="54" B="54"/>

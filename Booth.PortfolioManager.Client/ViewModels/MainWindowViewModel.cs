@@ -87,13 +87,8 @@ namespace Booth.PortfolioManager.Client.ViewModels
             FinancialYears = new ObservableCollection<DescribedObject<int>>();
             OwnedStocks = new ObservableCollection<DescribedObject<StockViewItem>>();
 
-#if DEBUG 
-           // var url = "https://docker.local:8443";
+          //  var url = "https://portfolio.boothfamily.id.au/api/"; 
             var url = "http://localhost:5000/api/";
-           // var url = "https://portfolio.boothfamily.id.au";
-#else
-            var url = "https://portfolio.boothfamily.id.au/api/";
-#endif           
             _RestClient = new RestClient(url);
 
             ViewParameter = new ViewParameter
@@ -168,12 +163,24 @@ namespace Booth.PortfolioManager.Client.ViewModels
    
         private async Task UpdatePortfolioProperties()
         {
-            var response = await _RestClient.Portfolio.GetProperties();
+            IEnumerable<RestApi.Portfolios.Stock> portfolioStocks;
 
-            PortfolioDateRange = new DateRange(response.StartDate, response.EndDate);
+            try
+            {
+                var response = await _RestClient.Portfolio.GetProperties();
+
+                PortfolioDateRange = new DateRange(response.StartDate, response.EndDate);
+                portfolioStocks = response.Holdings.Select(x => x.Stock);
+            }
+            catch
+            {
+                PortfolioDateRange = new DateRange(Date.Today, Date.Today);
+                portfolioStocks = new RestApi.Portfolios.Stock[] { };
+            }
 
             PopulateFinancialYearList();
-            PopulateStockList(response.Holdings.Select(x => x.Stock));
+            PopulateStockList(portfolioStocks);
+
         }
             
         private void PopulateFinancialYearList()
@@ -188,8 +195,6 @@ namespace Booth.PortfolioManager.Client.ViewModels
                 FinancialYears.Add(new DescribedObject<int>(currentFinancialYear - 1, "Previous"));
 
                 ViewParameter.FinancialYear = currentFinancialYear;
-
-                return;
             }
 
             if (PortfolioDateRange.FromDate == Date.MinValue)

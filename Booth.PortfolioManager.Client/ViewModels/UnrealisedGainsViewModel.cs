@@ -43,9 +43,9 @@ namespace Booth.PortfolioManager.Client.ViewModels
         {
             SimpleUnrealisedGainsResponse response;
             if (_Parameter.Stock.Id == Guid.Empty)
-                response = await _Parameter.RestClient.Portfolio.GetCapitalGains(new Date(_Parameter.SeletedDate));
+                response = await _Parameter.RestClient.Portfolio.GetCapitalGains(_Parameter.Date);
             else
-                response = await _Parameter.RestClient.Holdings.GetCapitalGains(_Parameter.Stock.Id, new Date(_Parameter.SeletedDate));
+                response = await _Parameter.RestClient.Holdings.GetCapitalGains(_Parameter.Stock.Id, _Parameter.Date);
             if (response == null)
                 return;
 

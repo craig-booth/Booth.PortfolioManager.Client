@@ -53,7 +53,7 @@ namespace Booth.PortfolioManager.Client.ViewModels
 
         public async override void RefreshView()
         {
-            var response = await _Parameter.RestClient.Portfolio.GetSummary(new Date(_Parameter.SeletedDate));
+            var response = await _Parameter.RestClient.Portfolio.GetSummary(_Parameter.Date);
             if (response == null)
                 return;
 

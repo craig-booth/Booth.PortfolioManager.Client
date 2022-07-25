@@ -29,19 +29,19 @@ namespace Booth.PortfolioManager.Client.Utilities
             }
         }
 
-        private DateTime _SelectedDate;
-        public DateTime SeletedDate
+        private Date _Date;
+        public Date Date
         {
             get
             {
-                return _SelectedDate;
+                return _Date;
             }
 
             set
             {
-                if (_SelectedDate != value)
+                if (_Date != value)
                 {
-                    _SelectedDate = value;
+                    _Date = value;
                     OnPropertyChanged();
                 }
             }
@@ -56,35 +56,35 @@ namespace Booth.PortfolioManager.Client.Utilities
             }
         }
 
-        public DateTime FromDate
+        public Date FromDate
         {
             get
             {
-                return _DateRange.FromDate.DateTime;
+                return _DateRange.FromDate;
             }
 
             set
             {
-                if (_DateRange.FromDate.DateTime != value)
+                if (_DateRange.FromDate != value)
                 {
-                    _DateRange = new DateRange(new Date(value), _DateRange.ToDate);
+                    _DateRange = new DateRange(value, _DateRange.ToDate);
                     OnPropertyChanged();
                 }
             }
         }
 
-        public DateTime ToDate
+        public Date ToDate
         {
             get
             {
-                return _DateRange.ToDate.DateTime;
+                return _DateRange.ToDate;
             }
 
             set
             {
-                if (_DateRange.ToDate.DateTime != value)
+                if (_DateRange.ToDate != value)
                 {
-                    _DateRange = new DateRange(_DateRange.FromDate, new Date(value));
+                    _DateRange = new DateRange(_DateRange.FromDate, value);
                     OnPropertyChanged();
                 }
             }
@@ -111,7 +111,7 @@ namespace Booth.PortfolioManager.Client.Utilities
 
         public ViewParameter()
         {
-            _SelectedDate = DateTime.Today;
+            _Date = Date.Today;
             _DateRange = new DateRange(Date.Today.AddYears(-1).AddDays(1), Date.Today);
             _FinancialYear = Date.Today.FinancialYear();
         }

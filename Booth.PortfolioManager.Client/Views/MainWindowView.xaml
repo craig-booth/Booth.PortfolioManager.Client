@@ -8,7 +8,7 @@
         xmlns:utilities="clr-namespace:Booth.PortfolioManager.Client.Utilities"
         xmlns:controls="clr-namespace:Booth.WpfControls;assembly=Booth.WpfControls"
         mc:Ignorable="d" Loaded="Window_Loaded"
-        Title="Portfolio Manager" Height="800" Width="1200">
+        Title="Portfolio Manager" Height="800" Width="1200" >
 
     <Window.Resources>
         <viewmodels:MainWindowViewModel x:Key="ViewModel" />
@@ -136,7 +136,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="Date" Grid.Column="0" />
-                    <DatePicker SelectedDate="{Binding ViewParameter.SeletedDate, Mode=TwoWay}" Grid.Column="1" />
+                    <DatePicker SelectedDate="{Binding ViewParameter.Date, Mode=TwoWay, Converter={StaticResource DateConverter}}" Grid.Column="1" />
                 </Grid>
 
                 <Grid>
@@ -161,9 +161,9 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="From" Grid.Column="0" />
-                    <DatePicker SelectedDate="{Binding ViewParameter.FromDate, Mode=TwoWay}" Grid.Column="1" />
+                    <DatePicker SelectedDate="{Binding ViewParameter.FromDate, Mode=TwoWay, Converter={StaticResource DateConverter}}" Grid.Column="1" />
                     <TextBlock Text="To" Grid.Column="2" />
-                    <DatePicker SelectedDate="{Binding ViewParameter.ToDate, Mode=TwoWay}" Grid.Column="3" />
+                    <DatePicker SelectedDate="{Binding ViewParameter.ToDate, Mode=TwoWay, Converter={StaticResource DateConverter}}" Grid.Column="3" />
                 </Grid>
 
 
