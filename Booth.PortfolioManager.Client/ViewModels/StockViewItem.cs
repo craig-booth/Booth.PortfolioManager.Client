@@ -21,9 +21,18 @@ namespace Booth.PortfolioManager.Client.ViewModels
 
         public StockViewItem(RestApi.Portfolios.Stock stock)
         {
-            Id = stock.Id;
-            AsxCode = stock.AsxCode;
-            Name = stock.Name;
+            if (stock != null)
+            {
+                Id = stock.Id;
+                AsxCode = stock.AsxCode;
+                Name = stock.Name;
+            }
+            else
+            {
+                Id = Guid.Empty;
+                AsxCode = "";
+                Name = "";
+            }
         }
 
         public string FormattedCompanyName

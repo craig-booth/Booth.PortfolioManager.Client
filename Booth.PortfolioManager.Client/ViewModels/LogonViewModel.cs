@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Security;
 
 using Booth.WpfControls;
 using Booth.PortfolioManager.RestApi.Client;
@@ -15,7 +10,34 @@ namespace Booth.PortfolioManager.Client.ViewModels
     {
         private readonly RestClient _RestClient;
         public string UserName { get; set; }
-        public SecureString Password { get; set; }
+        public string Password { get; set; }
+
+        private bool _LogonFailed;
+        public bool LogonFailed
+        {
+            get => _LogonFailed;
+            set
+            {
+                if (_LogonFailed != value)
+                {
+                    _LogonFailed = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string _ErrorMessage;
+        public string ErrorMessage
+        {
+            get => _ErrorMessage;
+            set
+            {
+                if (_ErrorMessage != value)
+                {
+                    _ErrorMessage = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public LogonViewModel(RestClient restClient)
         {
@@ -25,19 +47,30 @@ namespace Booth.PortfolioManager.Client.ViewModels
 
             Commands.Add(new DialogCommand("Logon", LogonCommand) { IsDefault = true });
             Commands.Add(new DialogCommand("Cancel", CancelCommand) { IsCancel = true });
+
+            LogonFailed = false;
+            ErrorMessage = "";
         }
 
         public RelayCommand LogonCommand { get; private set; }
         private async void Logon()
         {
-            await _RestClient.Authenticate(UserName, Password);
+            try
+            {
+                LogonFailed = false;
+                ErrorMessage = "";
 
-            _RestClient.SetPortfolio(new Guid("5D5DE669-726C-4C5D-BB2E-6520C924DB90"));
+                await _RestClient.Authenticate(UserName, Password);
 
-            Close();
-
-            OnLoggedOn(EventArgs.Empty);
-
+                _RestClient.SetPortfolio(new Guid("5D5DE669-726C-4C5D-BB2E-6520C924DB90"));
+                Close();
+                OnLoggedOn(EventArgs.Empty);
+            }
+            catch (Exception e)
+            {
+                ErrorMessage = e.Message;
+                LogonFailed = true;
+            }
         }
 
         public RelayCommand CancelCommand { get; private set; }

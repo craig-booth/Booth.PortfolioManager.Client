@@ -117,7 +117,8 @@ namespace Booth.PortfolioManager.Client.ViewModels.Transactions
 
         private bool CanSaveTransaction()
         {
-            return (TransactionViewModel != null) && (!TransactionViewModel.HasErrors);
+            return NewTransaction;
+           // return (TransactionViewModel != null) && (!TransactionViewModel.HasErrors);
         }
 
         public RelayCommand DeleteTransactionCommand { get; private set; }
@@ -136,7 +137,8 @@ namespace Booth.PortfolioManager.Client.ViewModels.Transactions
 
         private bool CanDeleteTransaction()
         {
-            return (TransactionViewModel != null) && (NewTransaction == false);
+            return false;
+           // return (TransactionViewModel != null) && (NewTransaction == false);
         }
 
         public event EventHandler<TransactionEventArgs> TransactionChanged;

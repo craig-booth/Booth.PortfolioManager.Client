@@ -80,12 +80,12 @@ namespace Booth.PortfolioManager.Client.ViewModels
             MarketValue = item.MarketValue;
             CapitalGain = item.CapitalGain;
 
-            if (item.DiscountMethod == CGTMethod.Discount)
+            if (item.DiscountMethod == CgtMethod.Discount)
             {
                 DiscountMethod = "Discount";
                 DiscoutedGain = item.DiscoutedGain;
             }
-            else if (item.DiscountMethod == CGTMethod.Indexation)
+            else if (item.DiscountMethod == CgtMethod.Indexation)
             {
                 DiscountMethod = "Indexation";
                 DiscoutedGain = 0.00m;

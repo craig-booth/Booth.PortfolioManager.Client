@@ -42,9 +42,9 @@ namespace Booth.PortfolioManager.Client.ViewModels
 
             DetailedUnrealisedGainsResponse response;
             if (_Parameter.Stock.Id == Guid.Empty)
-                response = await _Parameter.RestClient.Portfolio.GetDetailedCapitalGains(_Parameter.Date);
+                response = await _Parameter.RestClient.Portfolio.GetDetailedCapitalGains(DateUtils.EndOfFinancialYear(_Parameter.FinancialYear));
             else
-                response = await _Parameter.RestClient.Holdings.GetDetailedCapitalGains(_Parameter.Stock.Id, _Parameter.Date);
+                response = await _Parameter.RestClient.Holdings.GetDetailedCapitalGains(_Parameter.Stock.Id, DateUtils.EndOfFinancialYear(_Parameter.FinancialYear));
             if (response == null)
                 return;
 

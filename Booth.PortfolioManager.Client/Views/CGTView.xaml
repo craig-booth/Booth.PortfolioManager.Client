@@ -61,7 +61,7 @@
                 <controls:DataTable Data="{Binding CGTEvents}" DataType="{x:Type viewmodels:CGTEventViewModel}" Margin="0,30,0,0">
                     <controls:DataTable.Columns>
                         <controls:DataTableColumn Heading="Date" Width="70" MemberBinding="{Binding EventDate, StringFormat={}{0:d}, Mode=OneWay}" SummaryType="Fixed" SummaryValue="Total"/>
-                        <controls:DataTableColumn Heading="Company" Width="*" MemberBinding="{Binding CompanyName, Mode=OneWay}" />
+                        <controls:DataTableColumn Heading="Company" Width="*" MemberBinding="{Binding Stock.FormattedCompanyName, Mode=OneWay}" />
                         <controls:DataTableColumn Heading="Cost Base" Width="80" MemberBinding="{Binding CostBase, StringFormat={}{0:c2}, Mode=OneWay}" TextAlignment="Right" SummaryType="Sum" />
                         <controls:DataTableColumn Heading="Amount Received" Width="80" MemberBinding="{Binding AmountReceived, StringFormat={}{0:c2}, Mode=OneWay}" TextAlignment="Right" SummaryType="Sum" />
                         <controls:DataTableColumn Heading="Capital Gain" Width="80" MemberBinding="{Binding CapitalGain, StringFormat={}{0:c2}, Mode=OneWay}" TextAlignment="Right" SummaryType="Sum" />

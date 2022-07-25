@@ -24,7 +24,7 @@ namespace Booth.PortfolioManager.Client.ViewModels
 
             _EditTransactionViewModel = editTransactionViewModel;
 
-            EditTransactionCommand = new RelayCommand<Guid>(EditTransaction);
+            EditTransactionCommand = new RelayCommand<TransactionViewItem>(EditTransaction);
             CreateTransactionCommand = new RelayCommand<TransactionType>(CreateTransaction);
         }
 
@@ -67,10 +67,19 @@ namespace Booth.PortfolioManager.Client.ViewModels
         public async override void RefreshView()
         {
             RestApi.Portfolios.TransactionsResponse response;
-            if (_Parameter.Stock.Id == Guid.Empty)
-                response = await _Parameter.RestClient.Portfolio.GetTransactions(_Parameter.DateRange);
-            else
-                response = await _Parameter.RestClient.Holdings.GetTransactions(_Parameter.Stock.Id, _Parameter.DateRange);
+
+            try
+            {
+                if (_Parameter.Stock.Id == Guid.Empty)
+                    response = await _Parameter.RestClient.Portfolio.GetTransactions(_Parameter.DateRange);
+                else
+                    response = await _Parameter.RestClient.Holdings.GetTransactions(_Parameter.Stock.Id, _Parameter.DateRange);
+            }
+            catch (Exception e)
+            {
+                response = null;
+            }
+     
             if (response == null)
                 return;
 
@@ -88,10 +97,10 @@ namespace Booth.PortfolioManager.Client.ViewModels
             _EditTransactionViewModel.CreateTransaction(transactionType);
         }
 
-        public RelayCommand<Guid> EditTransactionCommand { get; private set; }
-        private void EditTransaction(Guid id)
+        public RelayCommand<TransactionViewItem> EditTransactionCommand { get; private set; }
+        private void EditTransaction(TransactionViewItem transaction)
         {
-            _EditTransactionViewModel.EditTransaction(id);
+            _EditTransactionViewModel.EditTransaction(transaction.Id);
         }
 
     }
@@ -100,7 +109,6 @@ namespace Booth.PortfolioManager.Client.ViewModels
     {
         public Guid Id { get; private set; }
         public StockViewItem Stock { get; private set; }
-        public string CompanyName {  get { return Stock.FormattedCompanyName; } }
         public Date TransactionDate { get; private set; }
         public string Description { get; private set; }
 
